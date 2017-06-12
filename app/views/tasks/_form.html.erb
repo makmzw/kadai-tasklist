@@ -1,6 +1,6 @@
-<div class="roW">
- <div class="col-xs-6">
-  <%= form_for(task) do |f| %>
+<div class="row">
+ <div class="col-xs-6 col-sm-offset-2 col-sm-5">
+   <%= form_for(task) do |f| %>
  <% if task.errors.any? %>
   <div class="alert alert-warning">
      <ul>
@@ -24,4 +24,4 @@
   <%= f.submit '登録', class: 'btn btn-primary' %>
  <% end %>
  </div>
-</div>
+ </div>
