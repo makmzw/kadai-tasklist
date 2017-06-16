@@ -1,5 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :require_user_logged_in, only: [:index, :show]
+  
+
  def index
    @tasks = Task.all.page(params[:page])
  end
@@ -61,6 +64,17 @@ def create
   params.require(:task).permit(:content, :status)
  end
 
+ def login(email, password)
+   @user = User.find_by(email: email)
+   if @user && @user.authenticate(password)
+     #ﾛｸﾞｲﾝ成功
+     session[:user_id] = @user.id
+     return true
+   else
+     #ﾛｸﾞｲﾝ失敗
+     return false
+   end
+  end
 end
 
 
