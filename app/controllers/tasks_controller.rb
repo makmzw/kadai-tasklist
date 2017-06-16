@@ -75,6 +75,13 @@ def create
      return false
    end
   end
+  
+  def correct_user 
+    @tasklist = current_user.microposts.find_by(id: params[:id])
+    unless @tasklist
+      redirect_to root_path
+    end
+  end
 end
 
 
