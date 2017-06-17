@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :require_user_logged_in, only: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
 
  def index
@@ -77,7 +78,7 @@ def create
   end
   
   def correct_user 
-    @tasklist = current_user.microposts.find_by(id: params[:id])
+    @tasklist = current_user.tasks.find_by(id: params[:id])
     unless @tasklist
       redirect_to root_path
     end
